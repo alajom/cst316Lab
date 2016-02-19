@@ -2,15 +2,15 @@
     <property name="src" value="src" />
 	<property name="build" value="build" />
 	<property name="jars" value="jars"/>
+	<property name="Main" value="banking.gui.Main"/>
 	<property name="given" value="../lab6given.jar"/>
 
         <path id="compile.classpath">
             <pathelement path="${build}/classes"/>  
-            <fileset dir="${jars}">
-               <include name="**/*.jar"/>
+            <fileset dir="${build}/classes">
+               <include name="**/*.class"/>
             </fileset>          
         </path>
-	
 	<target name="prepare">
 		<tstamp/>
 		<mkdir dir="${build}" />
@@ -30,7 +30,16 @@
 		<delete file="${jar}" />
 		<delete file="${given}" />
 	</target>
-
+	
+	<target name="run" depends="build">
+			<java fork="true" classname="${Main}">
+			  <classpath>
+			  	<path refid="compile.classpath"/>
+			  	<path location="${build}/classes/banking/gui"/>
+			  </classpath>	
+			  <arg value="my.properties"/>
+			</java>
+	</target>
 	<!-- create the given .java files -->
 	<target name="given" depends="build">
 		<delete file="${given}" />
