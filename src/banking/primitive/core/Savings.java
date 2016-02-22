@@ -1,5 +1,12 @@
 package banking.primitive.core;
 
+/**
+ * File: Savings.java
+ * @author lajom
+ * Date: Unknown
+ *
+ * Description: Savings is a type of account
+ */
 public class Savings extends Account {
 	private static final long serialVersionUID = 111L;
 	private int numWithdraws = 0;
