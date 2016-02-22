@@ -39,6 +39,12 @@ public class Checking extends Account {
 	public boolean withdraw(float amount) {
 		if (amount > 0.0f) {		
 			if (getState() == State.OPEN || (getState() == State.OVERDRAWN && balance > -100.0f)) {
+				if(balance - amount < -100.0f){
+					return false;
+				}
+				else if (numWithdraws > 10 && balance - 2.0f < -100.0f){
+					return false;
+				}
 				balance = balance - amount;
 				numWithdraws++;
 				if (numWithdraws > 10)
